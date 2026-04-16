@@ -1,0 +1,33 @@
+{
+  "langages": [
+    { "name": "Français", "file": "lang_FR.json", "code": "FR" },
+    { "name": "English",  "file": "lang_EN.json", "code": "EN" },
+    { "name": "Español",  "file": "lang_ES.json", "code": "ES" },
+    { "name": "Italiano", "file": "lang_IT.json", "code": "IT" },
+    { "name": "Deutsch",  "file": "lang_DE.json", "code": "DE" }
+  ],
+  "themes": {
+      "clair": {
+        "menu": ["steelblue4", "white"],
+        "titre": ["lightcyan2", "black"],
+        "chemin": ["lightcyan2", "blue"],
+        "bouton": ["DarkSlateGray1", "black"],
+        "saisie": ["white", "black"],
+        "alerte": ["lightcyan2", "red"],
+        "radbout": ["gray50", "black"],
+        "about": ["yellow", "black"],
+        "info": ["powderblue", "navy"]
+      },
+      "sombre": {
+        "menu": ["gray15", "white"],
+        "titre": ["gray20", "snow"],
+        "chemin": ["dodgerblue4", "white"],
+        "bouton": ["gray50", "white"],
+        "saisie": ["gray25", "white"],
+        "alerte": ["gray20", "red"],
+        "radbout": ["gray50", "black"],
+        "about": ["indigo", "white"],
+        "info": ["dodgerblue4", "yellow"]
+      }
+  }
+}
