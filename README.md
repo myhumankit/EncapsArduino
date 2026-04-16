@@ -2,8 +2,9 @@
 
 ## Procédure automatique : 
 
-1 Dézipper le dossier "Install_EncapsArduino_Linux" et conservez-le.
-2 Lancer le script "Script_install.sh" (double-clic puis lancer)
+- [1] Dézipper le dossier "Install_EncapsArduino_Linux" et conservez-le.
+
+- [2] Lancer le script "Script_install.sh" (double-clic puis lancer)
 
                          ==================================
 
@@ -15,7 +16,7 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé pour 
         ◦ Linux Mint : 20, 21, 22 et versions ultérieures.
         ◦ Debian : 11 (Bullseye), 12 (Bookworm) et versions ultérieures.
         ◦ Autres : Compatible avec la majorité des distributions utilisant GLIBC 2.31 ou supérieure.
-        
+
     • Prérequis système : Aucune installation de Python n'est requise. Cependant, si l'interface ne s'affiche pas, assurez-vous que les bibliothèques graphiques de base sont présentes (généralement déjà installées sur les versions "Desktop") : libx11-6, libglib2.0-0.
 
                        =============================
