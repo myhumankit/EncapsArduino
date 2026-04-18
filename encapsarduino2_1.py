@@ -1024,11 +1024,19 @@ except IOError:
     BoutYaml.invisible()
     Labelc.visible()
     TBExeArd.focus_set()
-    loc = locale.getlocale()[0]  # résup de la localisation de l'ordi (ex: fr_FR)
-    if loc:
-        codlang = loc.split('_')[1]   # sélection des 2 dernier car. (FR)
-    else:
-        codlang = "EN"            # par défaut on assigne l'anglais
+    codlang = "EN"                # anglais par défaut
+    codes_connus = [lang["code"] for lang in LANGUES]  # liste des codes langues connues
+    loc = locale.getlocale()[0]   # récup de la localisation de l'ordi (ex: fr_FR)
+    if loc:                       # fr_FR se compose de :  fr = langue, FR = pays      
+        elements = loc.split('_') # transforme "fr_FR" en une liste ["fr", "FR"]
+        langue_loc = elements[0].upper() # premier élément (langue) mis en majuscule
+        if langue_loc in codes_connus:    
+            codlang = langue_loc  
+        else: 
+            if len(elements) > 1:              # vérifier qu'il y a un 2e élément (le pays)
+                pays_loc = elements[1].upper() # on le convertit en majuscule
+                if pays_loc in codes_connus:
+                    codlang = pays_loc         # on prend le pays comme code langue
     #print("Langue par défaut: ", codlang)
     LockLang = True
     indtheme = 0
