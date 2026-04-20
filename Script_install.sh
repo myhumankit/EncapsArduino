@@ -16,7 +16,7 @@ cd "$(dirname "$0")"
 
 # --- Chemins SOURCES (Relatifs au script) ---
 # On assume que ces fichiers sont dans le même dossier que ce script .sh
-FICHEXE="./encapsarduino2_1" 
+FICHEXE="./encapsarduino2_2" 
 PARAM="./EncapsParam"
 ICONE="./Encapsule.png"
 
@@ -32,7 +32,7 @@ YELLOW="\e[33m"
 NC="\e[0m"
 
 echo -e "${YELLOW}==============================================${NC}"
-echo -e "${YELLOW}   Installation de EncapsArduino v2.1 ${NC}"
+echo -e "${YELLOW}   Installation de EncapsArduino v2.2 ${NC}"
 echo -e "${YELLOW}==============================================${NC}"
 
 # === Création des dossiers de destination ===
@@ -60,7 +60,7 @@ cat <<EOF > "$DESTLANCEUR/encapsarduino.desktop"
 Type=Application
 Name=EncapsArduino
 Comment=Lanceur créé par l'installateur
-Exec=$HOME/Applications/encapsarduino2_1
+Exec=$HOME/Applications/encapsarduino2_2
 Icon=$HOME/.local/share/icons/Encapsule.png
 Terminal=false
 Categories=Utility;Development;
@@ -68,7 +68,7 @@ EOF
 
 # === Finalisation des droits et rafraîchissement ===
 # 1. On rend l'exécutable bien... exécutable
-chmod +x "$DESTEXE/encapsarduino2_1"
+chmod +x "$DESTEXE/encapsarduino2_2"
 # 2. On donne les droits au lanceur .desktop
 chmod +x "$DESTLANCEUR/encapsarduino.desktop"
 # 3. On force le système à voir la nouvelle application immédiatement

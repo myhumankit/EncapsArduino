@@ -1,15 +1,19 @@
+Cette application permet de créer un programme arduino encapsulé.
+C'est à dire que les cartes et librairies utilisées resteront les mêmes tout au long de
+la maintenance de ce programme sous réserve de ne pas les avoir mis à jour.
+
 # Installation d'EncapsArduino
 
 ## Procédure automatique : 
 
-- [1] Dézipper le dossier "Install_EncapsArduino_Linux" et conservez-le.
+- [1] Dézipper le dossier "Release_Github" et conservez-le.
 
 - [2] Lancer le script "Script_install.sh" (double-clic puis lancer)
 
                          ==================================
 
 ## Compatibilité Linux
-Cet exécutable est fourni au format binaire autonome. Il a été compilé pour garantir une compatibilité maximale entre les différentes distributions.
+Cet exécutable est fourni au format binaire autonome. Il a été compilé sous Docker pour garantir une compatibilité maximale entre les différentes distributions.
 
     • Systèmes testés et supportés :
         ◦ Ubuntu : 20.04 LTS, 22.04 LTS, 24.04 LTS et versions ultérieures.
@@ -22,5 +26,40 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé pour 
                        =============================
 
 >Pour en savoir plus sur le fonctionnement et l'usage de ce > programme,
->se reporter au document :  EncapsArduino_v.2_1.pdf
+>se reporter au document :  EncapsArduino_v.2_2.pdf
+
+                       =============================
+
+Si vous deviez recompiler le programme, voici les procédures de compilations que j'ai pu faires sous Linux Mint 22.3 - Cinnamon 64-bit :
+
+# Compil PyInstaller :
+
+cd ~/DOCUMENTS/Python/DesktopCreator
+python3 -m venv venv
+source venv/bin/activate
+
+
+pip install pyinstaller
+pip install customtkinter
+pip install pillow
+pip install pyyaml
+
+
+python -m PyInstaller encapsarduino2_2.py \
+  --onefile \
+  --noconsole \
+  --add-data "Encapsule.png:." \
+  --hidden-import customtkinter \
+  --hidden-import PIL._tkinter_finder \
+  --hidden-import yaml
+
+# Compil Docker :
+
+cd ~/DOCUMENTS/Python/EncapsArduino/Compil_Docker
+
+docker run --rm -v "$(pwd):/src" -w /src python:3.10-slim-bullseye /bin/bash -c "apt-get update && apt-get install -y binutils python3-tk && pip install --upgrade pip && pip install -r requirements.txt pyinstaller && pyinstaller --onefile --windowed --icon=Encapsule.png encapsarduino2_2.py"
+
+sudo chown -R $USER:$USER dist build 
+
+                       =============================
 
