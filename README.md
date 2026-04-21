@@ -7,6 +7,7 @@ la maintenance de ce programme sous réserve de ne pas les avoir mis à jour.
 ## Procédure automatique : 
 
 - [1] Téléchargez le fichier "Release_Github_Linux.tar.gz" dans les [Releases]
+  
 	 (https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_2).
 
 - [2] Décompressez et lancez `Script_install.sh` (double-clic puis lancer)
@@ -67,6 +68,7 @@ sudo chown -R $USER:$USER dist build
 # Installation d'EncapsArduino sous Windows
 
 - [1] Téléchargez le fichier `EncapsArduino_Windows.zip` dans les [Releases]
+  
 	(https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_2).
 - [2] Décompressez l'archive.
 - [3] Double-cliquez sur `EncapsArduino.exe`.
