@@ -34,7 +34,7 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé sous 
 
 Si vous deviez recompiler le programme, voici les procédures de compilations que j'ai pu faires sous Linux Mint 22.3 - Cinnamon 64-bit :
 
-## Compil PyInstaller :
+## Compil Linux / PyInstaller :
 
 cd ~/DOCUMENTS/Python/DesktopCreator
 python3 -m venv venv
@@ -55,7 +55,7 @@ python -m PyInstaller encapsarduino2_2.py \
   --hidden-import PIL._tkinter_finder \
   --hidden-import yaml
 
-## Compil Docker :
+## Compil Linux / Docker :
 
 cd ~/DOCUMENTS/Python/EncapsArduino/Compil_Docker
 
@@ -74,7 +74,19 @@ sudo chown -R $USER:$USER dist build
 - [3] Double-cliquez sur `EncapsArduino.exe`.
 
 
+Si vous deviez recompiler le programme sous windows, voici la procédure de compilation que j'ai exécutée sous Windows 11 :
 
+## Compil Windows / PyInstaller :
+
+Dans une fenêtre terminal : 
+	Se placer dans le dossier où  se trouve le prog (cd C:\.....etc)
+	installer PyInstaller et pyyaml
+		pip3 install pyinstaller
+		pip3 install pyyaml	
+	puis lancer la compilation :
+		python -m PyInstaller --clean --onefile --noconsole --collect-all customtkinter --collect-all CTkMessagebox --add-data "Encapsule.ico;." --icon="Encapsule.ico" encapsarduino2_2.py
+ 
+		
 
 
 
