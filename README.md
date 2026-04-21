@@ -80,17 +80,17 @@ Si vous deviez recompiler le programme sous windows, voici la procédure de comp
 
 Dans une fenêtre terminal : 
 
-	Se placer dans le dossier où  se trouve le prog (cd C:\.....etc)
+	- [1] Se placer dans le dossier où  se trouve le prog (cd C:\.....etc)
 	
-	installer PyInstaller et pyyaml
+	- [2] Installer PyInstaller et PyYaml
 	
-		pip3 install pyinstaller
+			pip3 install pyinstaller
 		
-		pip3 install pyyaml	
+			pip3 install pyyaml	
 		
-	puis lancer la compilation :
+	- [3] Lancer la compilation :
 	
-		python -m PyInstaller --clean --onefile --noconsole --collect-all customtkinter --collect-all CTkMessagebox --add-data "Encapsule.ico;." --icon="Encapsule.ico" encapsarduino2_2.py
+			python -m PyInstaller --clean --onefile --noconsole --collect-all customtkinter --collect-all CTkMessagebox --add-data "Encapsule.ico;." --icon="Encapsule.ico" encapsarduino2_2.py
  
 		
 
