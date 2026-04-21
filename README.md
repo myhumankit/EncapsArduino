@@ -32,7 +32,7 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé sous 
 
                        =============================
 
-Si vous deviez recompiler le programme, voici les procédures de compilations que j'ai pu faires sous Linux Mint 22.3 - Cinnamon 64-bit :
+Si vous deviez recompiler le programme sous Linux, voici les procédures de compilations que j'ai utilisées sous Linux Mint 22.3 - Cinnamon 64-bit :
 
 ## Compil Linux / PyInstaller :
 
@@ -55,7 +55,8 @@ python -m PyInstaller encapsarduino2_2.py \
   --hidden-import PIL._tkinter_finder \
   --hidden-import yaml
 
-## Compil Linux / Docker :
+## Compil Linux / Docker :   
+(pour être compatible avec anciennes versions Ubuntu, Mint, Debian)
 
 cd ~/DOCUMENTS/Python/EncapsArduino/Compil_Docker
 
