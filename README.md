@@ -2,13 +2,14 @@ Cette application permet de créer un programme arduino encapsulé.
 C'est à dire que les cartes et librairies utilisées resteront les mêmes tout au long de
 la maintenance de ce programme sous réserve de ne pas les avoir mis à jour.
 
-# Installation d'EncapsArduino
+# Installation d'EncapsArduino sous Linux
 
 ## Procédure automatique : 
 
-- [1] Dézipper le dossier "Release_Github" et conservez-le.
+- [1] Téléchargez le fichier "Release_Github_Linux.tar.gz" dans les [Releases]
+	 (https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_2).
 
-- [2] Lancer le script "Script_install.sh" (double-clic puis lancer)
+- [2] Décompressez et lancez `Script_install.sh` (double-clic puis lancer)
 
                          ==================================
 
@@ -62,4 +63,16 @@ docker run --rm -v "$(pwd):/src" -w /src python:3.10-slim-bullseye /bin/bash -c 
 sudo chown -R $USER:$USER dist build 
 
                        =============================
+
+# Installation d'EncapsArduino sous Windows
+
+- [1] Téléchargez le fichier `EncapsArduino_Windows.zip` dans les [Releases]
+	(https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_2).
+- [2] Décompressez l'archive.
+- [3] Double-cliquez sur `EncapsArduino.exe`.
+
+
+
+
+
 
