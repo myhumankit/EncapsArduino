@@ -56,7 +56,7 @@ python -m PyInstaller encapsarduino2_2.py \
   --hidden-import yaml
 
 ## Compil Linux / Docker :   
-(pour être compatible avec anciennes versions Ubuntu, Mint, Debian)
+_(pour être compatible avec anciennes versions Ubuntu, Mint, Debian)_
 
 cd ~/DOCUMENTS/Python/EncapsArduino/Compil_Docker
 
