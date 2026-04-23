@@ -81,21 +81,28 @@ sudo chown -R $USER:$USER dist build
 3 Double-cliquez sur `EncapsArduino.exe`.
 
 
-Si vous deviez recompiler le programme sous windows, voici la procédure de compilation que j'ai exécutée sous Windows 11 :
 
 ## Compil Windows / PyInstaller :
 
-Dans une fenêtre terminal : 
+Si vous deviez recompiler le programme sous windows, voici la procédure de compilation que j'ai exécutée sous Windows 11 :
 
-1 Se placer dans le dossier où  se trouve le prog (cd C:\.....etc)
-	
-2 Installer PyInstaller et PyYaml
+1 Télécharger le dossier "Source code.zip" 
+
+2 Décompresser le dossier
+
+3 Dans une fenêtre terminal : 
+
+31 Se placer dans le dossier 
+
+32 Installer PyInstaller et PyYaml
 
 ```powershell
 pip3 install pyinstaller
-pip3 install pyyaml	
-```		
-3 Lancer la compilation :
+pip3 install pyyaml
+```
+
+33 Lancer la compilation :
+
 ```powershell
 python -m PyInstaller --clean --onefile --noconsole --collect-all customtkinter --collect-all CTkMessagebox --add-data "Encapsule.ico;." --icon="Encapsule.ico" encapsarduino2_2.py
 ```
