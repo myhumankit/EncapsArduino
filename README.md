@@ -11,7 +11,7 @@ la maintenance de ce programme sous réserve de ne pas les avoir mis à jour.
 2 Lancer le script "Script_install.sh" (double-clic puis lancer)
 
 
-                         ==================================
+==================================
 
 ## Compatibilité Linux
 Cet exécutable est fourni au format binaire autonome. Il a été compilé sous Docker pour garantir une compatibilité maximale entre les différentes distributions.
@@ -22,14 +22,14 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé sous 
 ◦ Debian : 11 (Bullseye), 12 (Bookworm) et versions ultérieures.
 ◦ Autres : Compatible avec la majorité des distributions utilisant GLIBC 2.31 ou supérieure.
 
-    • Prérequis système : Aucune installation de Python n'est requise. Cependant, si l'interface ne s'affiche pas, assurez-vous que les bibliothèques graphiques de base sont présentes (généralement déjà installées sur les versions "Desktop") : libx11-6, libglib2.0-0.
+• Prérequis système : Aucune installation de Python n'est requise. Cependant, si l'interface ne s'affiche pas, assurez-vous que les bibliothèques graphiques de base sont présentes (généralement déjà installées sur les versions "Desktop") : libx11-6, libglib2.0-0.
 
-                       =============================
+=============================
 
 >Pour en savoir plus sur le fonctionnement et l'usage de ce > programme,
 >se reporter au document :  EncapsArduino_v.2_2.pdf
 
-                       =============================
+=============================
 
 Si vous deviez recompiler le programme sous Linux, voici les procédures de compilations que j'ai utilisées sous Linux Mint 22.3 - Cinnamon 64-bit :
 
@@ -69,7 +69,7 @@ docker run --rm -v "$(pwd):/src" -w /src python:3.10-slim-bullseye /bin/bash -c 
 sudo chown -R $USER:$USER dist build
 ```
 
-                       =============================
+=============================
 
 # Installation d'EncapsArduino sous Windows
 
