@@ -75,7 +75,9 @@ sudo chown -R $USER:$USER dist build
 
 1 Téléchargez le fichier `EncapsArduino_Windows.zip` dans les [Releases]
 (https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_2).
+
 2 Décompressez l'archive.
+
 3 Double-cliquez sur `EncapsArduino.exe`.
 
 
