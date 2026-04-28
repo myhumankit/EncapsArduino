@@ -723,7 +723,7 @@ def Appel_verrouillage():
     if sys.platform == "win32":
         fich = os.path.join(LocActu,"lockcartslmt.ps1")
     else:
-        fich = os.path.join(LocActu,"lockcartslmt.sh").replace("\\","/")
+        fich = os.path.join(LocActu,"Applications/lockcartslmt.sh").replace("\\","/")
 
     # Transformation du ~ en chemin absolu réel
     fich_absolu = os.path.expanduser(fich)
