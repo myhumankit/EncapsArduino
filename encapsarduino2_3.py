@@ -1,5 +1,5 @@
 # Encapsarduino    Encapsulage programme Arduino
-# Version 2.3  YLC le 27/04/26 (intégration de l'appel du script de déverrouillage)
+# Version 2.3  YLC le 28/04/26 (intégration de l'appel du script de déverrouillage)
 # Source python compatible Windows et Linux
 # compilable avec Docker
 
@@ -259,7 +259,7 @@ FormMain = tk.Tk()
 FormMain.geometry("1000x600+400+200")
 FormMain.resizable(width=True, height=False)
 FormMain.configure(bg='lightcyan') 
-FormMain.title("EncapsArduino v.2.1")
+FormMain.title("EncapsArduino v.2.3")
 FormMain.option_add('*font', ('Arial', 11))
 FormMain.protocol("WM_DELETE_WINDOW", Quitter)
 
