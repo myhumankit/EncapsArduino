@@ -10,8 +10,9 @@ la maintenance de ce programme sous réserve de ne pas les avoir mis à jour.
 
 2 Lancer le script "Script_install.sh" (double-clic puis lancer)
 
+(Cela va installer l'exécutable ainsi que le script de verrouillage dans le menu Linux)
 
-==================================
+                         ==================================
 
 ## Compatibilité Linux
 Cet exécutable est fourni au format binaire autonome. Il a été compilé sous Docker pour garantir une compatibilité maximale entre les différentes distributions.
@@ -22,19 +23,18 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé sous 
 ◦ Debian : 11 (Bullseye), 12 (Bookworm) et versions ultérieures.
 ◦ Autres : Compatible avec la majorité des distributions utilisant GLIBC 2.31 ou supérieure.
 
-• Prérequis système : Aucune installation de Python n'est requise. Cependant, si l'interface ne s'affiche pas, assurez-vous que les bibliothèques graphiques de base sont présentes (généralement déjà installées sur les versions "Desktop") : libx11-6, libglib2.0-0.
+    • Prérequis système : Aucune installation de Python n'est requise. Cependant, si l'interface ne s'affiche pas, assurez-vous que les bibliothèques graphiques de base sont présentes (généralement déjà installées sur les versions "Desktop") : libx11-6, libglib2.0-0.
 
-=============================
+                       =============================
 
 >Pour en savoir plus sur le fonctionnement et l'usage de ce > programme,
->se reporter au document :  EncapsArduino_v.2_2.pdf
+>se reporter au document :  EncapsArduino_v.2_3.pdf
 
-=============================
+                       =============================
 
-Si vous deviez recompiler le programme sous Linux, voici les procédures de compilations que j'ai utilisées sous Linux Mint 22.3 - Cinnamon 64-bit :
+Si vous deviez recompiler le programme, voici les procédures de compilations que j'ai pu faires sous Linux Mint 22.3 - Cinnamon 64-bit :
 
 # Compil Linux / PyInstaller :
-
 ```bash
 cd ~/DOCUMENTS/Python/DesktopCreator
 python3 -m venv venv
@@ -47,7 +47,7 @@ pip install pillow
 pip install pyyaml
 ```
 ```bash
-python -m PyInstaller encapsarduino2_2.py \
+python -m PyInstaller encapsarduino2_3.py \
   --onefile \
   --noconsole \
   --add-data "Encapsule.png:." \
@@ -56,62 +56,46 @@ python -m PyInstaller encapsarduino2_2.py \
   --hidden-import yaml
 ```
 
-## Compil Linux / Docker :   
-_(pour être compatible avec anciennes versions Ubuntu, Mint, Debian)_
+# Compil Linux / Docker :
 
+(pour être compatible avec anciennes versions Ubuntu, Mint, Debian)
 ```bash
 cd ~/DOCUMENTS/Python/EncapsArduino/Compil_Docker
 ```
 ```bash
-docker run --rm -v "$(pwd):/src" -w /src python:3.10-slim-bullseye /bin/bash -c "apt-get update && apt-get install -y binutils python3-tk && pip install --upgrade pip && pip install -r requirements.txt pyinstaller && pyinstaller --onefile --windowed --icon=Encapsule.png encapsarduino2_2.py"
+docker run --rm -v "$(pwd):/src" -w /src python:3.10-slim-bullseye /bin/bash -c "apt-get update && apt-get install -y binutils python3-tk && pip install --upgrade pip && pip install -r requirements.txt pyinstaller && pyinstaller --onefile --windowed --icon=Encapsule.png encapsarduino2_3.py"
 ```
 ```bash
-sudo chown -R $USER:$USER dist build
+sudo chown -R $USER:$USER dist build 
 ```
-
-=============================
+                       =============================
 
 # Installation d'EncapsArduino sous Windows
 
 1 Téléchargez le fichier `EncapsArduino_Windows.zip` dans les [Releases]
-(https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_2).
-
+(https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_3).
 2 Décompressez l'archive.
-
 3 Double-cliquez sur `EncapsArduino.exe`.
+4 Pour verrouiller le dossier des cartes et les librairies, lancer le script Powershel "lockcartlib.ps1"
 
-
-
-## Compil Windows / PyInstaller :
 
 Si vous deviez recompiler le programme sous windows, voici la procédure de compilation que j'ai exécutée sous Windows 11 :
 
-- 1 Télécharger le dossier "Source code.zip" 
+## Compil Windows / PyInstaller :
 
-- 2 Décompresser le dossier
+Dans une fenêtre terminal : 
 
-- 3 Dans une fenêtre terminal : 
-
-- - - 31 Se placer dans le dossier 
-
-```powershell
-cd ......
-```
-
-- - - 32 Installer PyInstaller et PyYaml
-
+1 Se placer dans le dossier où  se trouve le prog (cd C:\.....etc)
+	
+2 Installer PyInstaller et PyYaml
 ```powershell
 pip3 install pyinstaller
-pip3 install pyyaml
-```
-
-- - - 33 Lancer la compilation :
-
+pip3 install pyyaml	
+```		
+3 Lancer la compilation :
 ```powershell
-python -m PyInstaller --clean --onefile --noconsole --collect-all customtkinter --collect-all CTkMessagebox --add-data "Encapsule.ico;." --icon="Encapsule.ico" encapsarduino2_2.py
-```
-
-Une fois la commande terminée, vous trouverez l'exécutable dans le dossier dist.
+python -m PyInstaller --clean --onefile --noconsole --collect-all customtkinter --collect-all CTkMessagebox --add-data "Encapsule.ico;." --icon="Encapsule.ico" encapsarduino2_3.py
+``` 
 		
 
 

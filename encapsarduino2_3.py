@@ -1,6 +1,7 @@
-#Encapsarduino    Encapsulage programme Arduino V.2_2
-# Version 2.2    YLC le 20/04/26   Source python compatible Windows et Linux
-#compilable avec Docker
+# Encapsarduino    Encapsulage programme Arduino
+# Version 2.3  YLC le 27/04/26 (intégration de l'appel du script de déverrouillage)
+# Source python compatible Windows et Linux
+# compilable avec Docker
 
 import os
 import tkinter as tk
@@ -149,6 +150,7 @@ def set_style():
     appliquer_style(Label4, "titre")
     appliquer_style(TextBox, "saisie")
     appliquer_style(Boutonvalid, "bouton")
+    appliquer_style(BoutDeverr, "bouton1")
     appliquer_style(Label5, "titre")
     appliquer_style(Messereur, "alerte")
     Label6.lift()
@@ -366,6 +368,7 @@ def load_language(langue):
         RadioBout2['text']=TEXTES.get("Non","missing key: Non")
         Label4['text']=TEXTES.get("QnouvCart","missing key: QnouvCart")
         Boutonvalid['text']=TEXTES.get("Valider","missing key: Valider")
+        BoutDeverr['text']=TEXTES.get("Deverrouiller","missing key: Déverrouiller")
         Label5['text']=TEXTES.get("Qprogmodif","missing key: Qprogmodif")
         menubar.entryconfig(IDX_MENU_FICHIER, label=TEXTES.get("Fichier","missing key: Fichier"))
         menu1.entryconfig(IDX_QUITTER, label=TEXTES.get("Quitter","missing key: Quitter"))
@@ -506,6 +509,7 @@ def ClicButtonOk0():           # validation du répertoire des applications
     TextBox.invisible()
     ComboCart.invisible()
     Boutonvalid.invisible()
+    BoutDeverr.invisible()
     Messereur['text']=""
     RadioBout1.deselect()
     RadioBout2.deselect()
@@ -535,6 +539,7 @@ def BoutRad_sel():          # saisie de la réponse si modification ou non d'un 
     Label4.invisible()
     TextBox.invisible()
     Boutonvalid.invisible()
+    BoutDeverr.invisible()
     selection = varbout.get()
     Label3.invisible()
     ComboCart.invisible()
@@ -623,13 +628,23 @@ def safe_open_path(path):     # ouverture de dossier indépendant du compilateur
         for var in ['LD_LIBRARY_PATH', 'PYTHONPATH', 'PYTHONHOME']:
             new_env.pop(var, None)
     try:
-        if isinstance(path, str):   # C'est une chaîne de caractères (Dossier ou URL)
-            if sys.platform == "win32":
-                os.startfile(path)  # Sous Windows, on utilise 'os.startfile'
+        if sys.platform == "win32":
+            if isinstance(path, list):
+                # Cas d'un script (ex: PowerShell)
+                # On construit la commande pour forcer l'exécution du .ps1
+                commande = ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File"] + path
+                return subprocess.Popen(commande)
             else:
-                subprocess.Popen(['xdg-open', path], env=new_env) # Sous Linux, on utilise 'xdg-open' avec l'environnement propre
-        else:     # Sinon c'est une liste (p.ex. Lancement de l'IDE Arduino avec arguments)
-            subprocess.Popen(path, env=new_env)  # Popen fonctionne sur Windows et Linux         
+                # Cas d'un dossier ou URL
+                os.startfile(path)
+        else:
+            # --- LOGIQUE LINUX ---
+            if isinstance(path, str):
+                # Dossier ou URL
+                return subprocess.Popen(['xdg-open', path], env=new_env)
+            else:
+                # Script .sh ou binaire
+                return subprocess.Popen(path, env=new_env)
     except Exception as e:
         print(f"Erreur avec {path} : {e}")
 
@@ -664,6 +679,18 @@ def on_select_prog(event) :       # saisie du programme à modifier dans la list
            FormMain.destroy()     # ferme le fenetre
            show_alerte2(selection)  # Affichage d'alerte  Fichier yaml absent
 
+def dossier_inscriptible(path):    # pour tester si le dossier cartes est verrouillé 
+    try:
+        test_file = os.path.join(path, "lock_test.tmp")
+        with open(test_file, "w") as f:
+            f.write("x")
+        os.remove(test_file)
+        return False  # pas verrouillé
+    except PermissionError:
+        return True   # verrouillé
+    except Exception:
+        return True   # on considère verrouillé par sécurité
+  
 def clear_titreliscart(event):
     if ComboCart.get() == titreliscart:
         ComboCart.set("")
@@ -682,12 +709,34 @@ def on_select_carte(event) :       # saisie du nom/version de carte choisie
         TextBox.visible()
         TextBox['text']=""
         TextBox.focus_set()
-        Messereur['text']=TEXTES.get("Mesunlock","missing key: Mesunlock")
+        if os.path.exists(os.path.join(CartesPath,".locked")) :   # test si dossier cartes verrouillé  
+            BoutDeverr.visible()
+            Messereur['text']=TEXTES.get("Mesunlock","missing key: Mesunlock")
     else :
         CarteSelPath=os.path.join(CartesPath,selection).replace("\\","/")
         Label4.invisible()
         TextBox.invisible()
         #print ("CarteSelPath= "+CarteSelPath)
+          
+def Appel_verrouillage():
+    # Définition des chemins avec le tilde ~
+    if sys.platform == "win32":
+        fich = os.path.join(LocActu,"lockcartslmt.ps1")
+    else:
+        fich = os.path.join(LocActu,"lockcartslmt.sh").replace("\\","/")
+
+    # Transformation du ~ en chemin absolu réel
+    fich_absolu = os.path.expanduser(fich)
+
+    # Contrôle de présence avec le chemin résolu
+    if os.path.exists(fich_absolu):
+        # On passe le chemin résolu dans une LISTE
+        safe_open_path([fich_absolu])
+        Messereur['text']=""
+        BoutDeverr.invisible()
+    else:
+        # On affiche le chemin résolu pour que l'utilisateur comprenne où le script est attendu
+        print(f"Script de verrouillage non trouvé : {fich_absolu}")
 
 def ClicButtonValid():          # validation de création de programme (avec nouvelle carte ou non)
     global selection, NomProg, CarteSelPath, VersionCarte, NomCarte, ErrMsg, LockCart
@@ -956,6 +1005,10 @@ noucarte_var = StringVar()
 TextBox=Entry(FormMain,textvariable = noucarte_var)                # champ de saisie de la nouvelle carte
 TextBox.visible = lambda: TextBox.place(x=490, y=380)
 TextBox.invisible = lambda: TextBox.place_forget()
+
+BoutDeverr=Button(FormMain, text="", command = Appel_verrouillage)      # validation finale
+BoutDeverr.visible = lambda: BoutDeverr.place(x=250, y=430)
+BoutDeverr.invisible = lambda: BoutDeverr.place_forget()
 
 Boutonvalid=Button(FormMain, text="", command = ClicButtonValid)      # validation finale
 Boutonvalid.visible = lambda: Boutonvalid.place(x=700, y=430)
