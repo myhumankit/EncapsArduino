@@ -624,18 +624,26 @@ def safe_open_path(path):     # ouverture de dossier indépendant du compilateur
     # Lance une commande ou ouvre un chemin en nettoyant l'environnement.
     # 'commande' peut être un simple chemin (string) ou une liste [prog, arg]
     new_env = os.environ.copy()    # préparation d'un environnement propre
-    if sys.platform.startswith('linux'):
+    if sys.platform.startswith('linux'):    # Nettoyage Linux
         for var in ['LD_LIBRARY_PATH', 'PYTHONPATH', 'PYTHONHOME']:
             new_env.pop(var, None)
+    # On convertit en objet Path pour normaliser les slashs/backslashs selon l'OS
+    if isinstance(path, list):
+        # On s'assure que chaque élément de la liste est un chemin propre
+        path = [str(Path(p)) for p in path]
+    else:
+        path = str(Path(path))
     try:
         if sys.platform == "win32":
             if isinstance(path, list):
-                # Cas d'un script (ex: PowerShell)
-                # On construit la commande pour forcer l'exécution du .ps1
-                commande = ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File"] + path
-                return subprocess.Popen(commande)
-            else:
-                # Cas d'un dossier ou URL
+                exe = path[0].lower()
+                if exe.endswith(".ps1"):   # Cas d'un script (ex: PowerShell)     
+                    # On construit la commande pour forcer l'exécution du .ps1
+                    commande = ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File"] + path
+                    return subprocess.Popen(commande)
+                else:     # cas d'un executable
+                    return subprocess.Popen(path)
+            else:    # Cas d'un dossier ou URL
                 os.startfile(path)
         else:
             # --- LOGIQUE LINUX ---
@@ -825,7 +833,9 @@ def ClicButtonValid():          # validation de création de programme (avec nou
         yaml.safe_dump(config, file, default_flow_style=False, allow_unicode=True)
 
     shutil.copy(YamlLocalPath, YamlPath)
-
+    #print("PathExe ",PathExe)
+    #print("ino_path ",str(ino_path))
+    
     safe_open_path([PathExe, str(ino_path)])
     FormMain.destroy()
 
@@ -883,7 +893,7 @@ LabExeArd2.invisible = lambda: LabExeArd2.place_forget()
 
 PathExe_var = StringVar()
 
-TBExeArd=Entry(FormMain, width=65, textvariable = PathExe_var)    # champ de saisie du chemin de l'exe Arduio
+TBExeArd=Entry(FormMain, width=65, textvariable = PathExe_var)    # champ de saisie du chemin de l'exe Arduino
 TBExeArd.visible = lambda: TBExeArd.place(x=290, y=10)
 TBExeArd.invisible = lambda: TBExeArd.place_forget()
 
