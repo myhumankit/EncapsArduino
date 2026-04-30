@@ -1,12 +1,13 @@
 Cette application permet de créer un programme arduino encapsulé.
 C'est à dire que les cartes et librairies utilisées resteront les mêmes tout au long de
-la maintenance de ce programme sous réserve de ne pas les avoir mis à jour.
+la maintenance de ce programme sous réserve de ne pas les avoir mises à jour.
 
 # Installation d'EncapsArduino sous Linux
 
 ## Procédure automatique : 
 
-1 Dézipper le dossier "Release_Github" et conservez-le.
+1 Dézipper le dossier "Release_Github_Linux.tar.gz " et conservez-le.
+(https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_3).
 
 2 Lancer le script "Script_install.sh" (double-clic puis lancer)
 
@@ -32,7 +33,7 @@ Cet exécutable est fourni au format binaire autonome. Il a été compilé sous 
 
                        =============================
 
-Si vous deviez recompiler le programme, voici les procédures de compilations que j'ai pu faires sous Linux Mint 22.3 - Cinnamon 64-bit :
+Si vous deviez recompiler le programme, voici les procédures de compilations que j'ai pu faire sous Linux Mint 22.3 - Cinnamon 64-bit :
 
 # Compil Linux / PyInstaller :
 ```bash
@@ -72,7 +73,7 @@ sudo chown -R $USER:$USER dist build
 
 # Installation d'EncapsArduino sous Windows
 
-1 Téléchargez le fichier `EncapsArduino_Windows.zip` dans les [Releases]
+1 Téléchargez le fichier `Release_Github_Windows.zip` dans les [Releases]
 (https://github.com/myhumankit/EncapsArduino/releases/tag/V.2_3).
 2 Décompressez l'archive.
 3 Double-cliquez sur `EncapsArduino.exe`.
